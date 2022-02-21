@@ -11,6 +11,8 @@ contract UniswapV2ERC20 is IUniswapV2ERC20 {
     uint8 public constant decimals = 18;
     uint  public totalSupply;
     mapping(address => uint) public balanceOf;
+    //keep track of the allowance between the owner of the contract
+    //(owner, spender, amount)
     mapping(address => mapping(address => uint)) public allowance;
 
     bytes32 public DOMAIN_SEPARATOR;
@@ -78,6 +80,8 @@ contract UniswapV2ERC20 is IUniswapV2ERC20 {
         return true;
     }
 
+    // With this function, it could skip the approval process for the transferFrom.@author
+    // It is not eip20, so not all erc20 token have this function.
     function permit(address owner, address spender, uint value, uint deadline, uint8 v, bytes32 r, bytes32 s) external {
         require(deadline >= block.timestamp, 'UniswapV2: EXPIRED');
         bytes32 digest = keccak256(
