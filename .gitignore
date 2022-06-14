@@ -17,3 +17,7 @@ typechain
 #Hardhat files
 cache
 artifacts
+
+.idea
+.vscode
+.DS_Store
